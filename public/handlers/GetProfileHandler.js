@@ -18,7 +18,7 @@ export class GetProfileHandler extends AbstractHandler{
             const profileInfo =  await this.getProfileUseCase.execute();
             const formattedBirthDate = this.formatDate(profileInfo.birthDate);
             if (profileInfo.phoneNumber) {
-                phoneProfileInput.value = this.formatPhone(profileInfo.phoneNumber.slice(1));
+                phoneProfileInput.value = profileInfo.phoneNumber;
             }
 
             nameProfileInput.value = profileInfo.fullName;
@@ -30,8 +30,4 @@ export class GetProfileHandler extends AbstractHandler{
             return error
         }
     }
-
-    c
-
-
 }

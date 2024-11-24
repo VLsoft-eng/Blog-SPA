@@ -1,9 +1,9 @@
 export class UpdateProfileRecord {
-    constructor(fullName, birthDate, gender, phone, email) {
+    constructor(fullName, birthDate, gender, phoneNumber, email) {
         this.fullName = fullName;
         this.birthDate = birthDate;
         this.gender = gender;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.email = email;
     }
 }

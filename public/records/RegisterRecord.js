@@ -1,9 +1,9 @@
 export class RegisterRecord {
-    constructor(fullName, birthDate, gender, phone, email, password) {
+    constructor(fullName, birthDate, gender, phoneNumber, email, password) {
         this.fullName = fullName;
         this.birthDate = birthDate;
         this.gender = gender;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
     }

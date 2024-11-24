@@ -39,7 +39,7 @@ export class UserValidator {
             this.isValid = false;
         }
 
-        if (!this.isPhoneValid(ProfileRecord.phone)) {
+        if (!this.isPhoneValid(ProfileRecord.phoneNumber)) {
             this.errors.push({field: 'phone-profile-input', message: 'Телефон не соответствует формату +7 (xxx) xxx-xx-xx'})
             this.isValid = false;
         }
@@ -77,7 +77,7 @@ export class UserValidator {
             this.isValid = false;
         }
 
-        if (!this.isPhoneValid(RegisterRecord.phone)) {
+        if (!this.isPhoneValid(RegisterRecord.phoneNumber)) {
             this.errors.push({field: 'phone-register-input', message: 'Телефон не соответствует формату +7 (xxx) xxx-xx-xx'})
             this.isValid = false;
         }
