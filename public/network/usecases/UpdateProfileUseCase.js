@@ -18,14 +18,12 @@ export class UpdateProfileUseCase {
         const body = JSON.stringify(updateProfileRecord)
 
         try {
-            const response = await ApiClient.sendRequest(
+            await ApiClient.sendRequestEmptyResponse(
                 UpdateProfileUseCase.UPDATE_PROFILE_URL,
                 body,
                 headers,
                 UpdateProfileUseCase.UPDATE_PROFILE_METHOD
             );
-            console.log(response);
-            return response.token;
         } catch (error) {
             throw error;
         }

@@ -19,7 +19,28 @@ export class ApiClient {
             return await response.json();
         } else {
             const errorBody = await response.json();
+            console.log(0)
             throw {errorCode: response.status, errorBody: errorBody};
         }
+    }
+
+    static async sendRequestEmptyResponse(url, body = null, headers = {}, method = "GET") {
+        const fullUrl = `${ApiClient.BASE_URL}${url}`;
+
+        const options = {
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+                ...headers
+            },
+            body: body ? body : null,
+        }
+
+        const response = await fetch(fullUrl, options);
+        if (!response.ok) {
+            const errorBody = await response.json();
+            throw {errorCode: response.status, errorBody: errorBody};
+        }
+
     }
 }

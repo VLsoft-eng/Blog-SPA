@@ -14,6 +14,7 @@ export class UpdateProfileHandler extends AbstractHandler {
         e.preventDefault();
 
         this.clearInvalidFields(UserValidator.errors);
+        console.log(UserValidator.errors)
 
         const email = document.getElementById('email-profile-input').value;
         const fullname = document.getElementById('name-profile-input').value;
@@ -29,10 +30,9 @@ export class UpdateProfileHandler extends AbstractHandler {
             this.markInvalidFields(UserValidator.errors);
         } else {
             try {
-                const response = await this.updateProfileUseCase.execute(updateProfileRecord);
-                await router.navigate('/profile');
+                await this.updateProfileUseCase.execute(updateProfileRecord);
                 this.clearInvalidFields(UserValidator.errors);
-                await headerRenderer.renderHeader();
+                await router.navigate('/profile');
             } catch (error) {
                 console.log(error)
                 const errors = [{field: 'email-profile-input', message: 'Почта уже занята'}];
