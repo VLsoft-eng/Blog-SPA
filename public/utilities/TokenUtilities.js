@@ -14,4 +14,9 @@ export class TokenUtilities {
     static setToken(token) {
         document.cookie = `auth_token=${token}; path=/; samesite=strict`;
     }
+
+    static isAuthorized() {
+        const token = TokenUtilities.getToken();
+        return !!token;
+    }
 }

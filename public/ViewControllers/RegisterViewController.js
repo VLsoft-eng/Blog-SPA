@@ -2,13 +2,12 @@ import {RegisterHandler} from "../handlers/RegisterHandler.js";
 import {renderContent} from "../utilities/render/contentRenderUtilities.js";
 
 export class RegisterViewController {
-    constructor(headerRenderer) {
-        this.headerRenderer = headerRenderer;
+    constructor() {
         this.registerHandler = new RegisterHandler();
     }
 
     async onLoad() {
-        await this.headerRenderer.renderHeader();
+        await headerRenderer.renderHeader();
         await renderContent('resources/templates/auth/register.html');
 
         const phoneRegisterInput = document.getElementById("phone-register-input");

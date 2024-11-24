@@ -9,7 +9,7 @@ import {ProfileViewController} from "./ViewControllers/ProfileViewController.js"
 
 export const router = new Navigo("/");
 
-const headerRenderer = new HeaderRenderer();
+window.headerRenderer = new HeaderRenderer();
 const loginViewController = new LoginViewController(headerRenderer);
 const logoutViewController = new LogoutViewController(headerRenderer);
 const registerViewController = new RegisterViewController(headerRenderer);

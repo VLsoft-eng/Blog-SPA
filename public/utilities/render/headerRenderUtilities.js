@@ -33,11 +33,6 @@ export class HeaderRenderer {
         this.unauthorizeNavigateElemenets = ["main-nav-link", "authors-nav-link", "groups-nav-link"];
     }
 
-    static isAuthorized() {
-        const token = TokenUtilities.getToken();
-        return !!token;
-    }
-
     async fetchTemplate(url) {
         const response = await fetch(url);
         return await response.text();
@@ -100,7 +95,7 @@ export class HeaderRenderer {
     }
 
     async renderHeader() {
-        if (HeaderRenderer.isAuthorized()) {
+        if (TokenUtilities.isAuthorized()) {
             await this.renderAuthorizedHeader();
         } else {
             await this.renderUnauthorizedHeader();
