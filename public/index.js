@@ -1,18 +1,51 @@
-import {renderHeader, renderStaticContent} from "./public/utilities/render/headerRenderUtilities.js";
+import {HeaderRenderer} from "./utilities/render/headerRenderUtilities.js";
+import {renderContent} from "./utilities/render/contentRenderUtilities.js";
+import {LoginViewController} from "./ViewControllers/LoginViewController.js";
+import {LogoutViewController} from "./ViewControllers/LogoutViewController.js";
+import {RegisterViewController} from "./ViewControllers/RegisterViewController.js";
+import {MainPageViewController} from "./ViewControllers/MainPageViewController.js";
+import {ProfileViewController} from "./ViewControllers/ProfileViewController.js";
 
 
-const router = new Navigo("/");
+export const router = new Navigo("/");
 
-router.on('/login', function() {
-    renderHeader();
-})
+const headerRenderer = new HeaderRenderer();
+const loginViewController = new LoginViewController(headerRenderer);
+const logoutViewController = new LogoutViewController(headerRenderer);
+const registerViewController = new RegisterViewController(headerRenderer);
+const mainPageViewController = new MainPageViewController(headerRenderer);
+const profileViewController = new ProfileViewController(headerRenderer);
 
-    // Обработчик маршрута для страницы 404
-    .notFound(() => {
-        renderStaticContent("/resources/templates/notFound.html");  // Загружаем страницу 404
+router
+    .on('/', async function () {
+        await mainPageViewController.onLoad()
+        router.updatePageLinks();
     })
+    .on('/login', async function () {
+        await loginViewController.onLoad();
+        router.updatePageLinks();
+    })
+    .on('/register', async function () {
+        await registerViewController.onLoad();
+        router.updatePageLinks();
+    })
+    .on('/logout', async function () {
+        await logoutViewController.onLoad();
+        router.updatePageLinks();
+    })
+    .on('/profile', async function () {;
+        await profileViewController.onLoad();
+        router.updatePageLinks();
+    })
+    .notFound(async () => {
+        console.log("Not Found");
+        await headerRenderer.renderHeader();
+        await renderContent("/resources/templates/notFound.html");
+        router.updatePageLinks();
+    })
+    .resolve();
 
-// Разрешение маршрута
-router.resolve();
+
+
 
 

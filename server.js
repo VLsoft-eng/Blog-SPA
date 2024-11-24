@@ -16,5 +16,5 @@ function serveFile(filePath) {
 staticAssets(app);
 app.get('*', serveFile(path.join(__dirname, 'public', 'index.html')));
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`App listening at http://localhost:${port}`);
 });

@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="col-12 col-md-8 col-lg-8 mt-2 align-self-start">
+    <div class="card shadow">
+        <div class="card-body">
+            <form id="update-profile-form">
+                <div class="mb-3 row">
+                    <label for="email-profile-input" class="col-12 col-md-3 col-form-label">Email</label>
+                    <div class="col-12 col-md-9">
+                        <input type="email" class="form-control" id="email-profile-input"
+                               placeholder="name@example.com">
+                        <div id="email-profile-input-error" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="name-profile-input" class="col-12 col-md-3 col-form-label">ФИО</label>
+                    <div class="col-12 col-md-9">
+                        <input type="text" class="form-control" id="name-profile-input"
+                               placeholder="Иванов Иван Иванович">
+                        <div id="name-profile-input-error" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="phone-profile-input" class="col-12 col-md-3 col-form-label">Телефон</label>
+                    <div class="col-12 col-md-9">
+                        <input type="text" class="form-control" id="phone-profile-input"
+                               placeholder="+7 (xxx) xxx-xx-xx">
+                        <div id="phone-profile-input-error" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="gender-profile-input" class="col-12 col-md-3 col-form-label">Пол</label>
+                    <div class="col-12 col-md-9">
+                        <select id="gender-profile-input" class="form-select">
+                            <option value="Male">Мужчина</option>
+                            <option value="Female">Женщина</option>
+                        </select>
+                        <div id="gender-profile-input-error" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="birth-profile-input" class="col-12 col-md-3 col-form-label">Дата рождения</label>
+                    <div class="col-12 col-md-9">
+                        <input type="date" class="form-control" id="birth-profile-input" placeholder="дд.мм.гггг">
+                        <div id="birth-profile-input-error" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

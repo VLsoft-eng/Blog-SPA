@@ -1,32 +1,44 @@
-<div class="container-fluid" id = "content">
-    <div class="card" style="width: 400px;">
+<div class="row w-100 justify-content-center align-self-center">
+    <div class="card col-8 col-md-3 shadow">
         <div class="card-body">
-            <h5 class="card-title text-center">Вход</h5>
-            <form>
+            <h5 class="card-title text-center">Регистрация</h5>
+            <form id = "register-form">
                 <div class="mb-3">
                     <label for="name-register-input" class="form-label">ФИО</label>
-                    <input type="text" class="form-control" id="name-register-input" placeholder="Иванов Иван Иванович">
+                    <input type="text" class="form-control" id="name-register-input"
+                           placeholder="Иванов Иван Иванович">
+                    <div id="name-register-input-error" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="birth-register-input" class="form-label">ФИО</label>
-                    <input type="datetime-local" class="form-control" id="birth-register-input" placeholder="дд.мм.гггг">
+                    <label for="birth-register-input" class="form-label">Дата рождения</label>
+                    <input type="date" class="form-control" id="birth-register-input"
+                           placeholder="дд.мм.гггг">
+                    <div id="birth-register-input-error" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="gender-register-input">Пол</label>
-                    <select id="gender-register-input">
+                    <label for="gender-register-input" class="form-label">Пол</label>
+                    <select id="gender-register-input" class="form-select">
                         <option value="Male">Мужчина</option>
                         <option value="Female">Женщина</option>
                     </select>
-
-                    <button id="submit">Отправить</button>
+                    <div id="gender-register-input-error" class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="phone-register-input" class="form-label">Телефон</label>
+                    <input type="text" class="form-control" id="phone-register-input"
+                           placeholder="+7 (xxx) xxx-xx-xx">
+                    <div id="phone-register-input-error" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
                     <label for="email-register-input" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email-register-input" placeholder="name@example.com">
+                    <input type="email" class="form-control" id="email-register-input"
+                           placeholder="name@example.com">
+                    <div id="email-register-input-error" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Пароль</label>
-                    <input type="password" class="form-control" id="password">
+                    <label for="password-register-input" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="password-register-input">
+                    <div id="password-register-input-error" class="invalid-feedback"></div>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">Зарегистрироваться</button>

@@ -6,11 +6,7 @@ export class LoginUseCase {
 
     async execute(loginRecord) {
         const headers = {};
-        const body = JSON.stringify({
-            email: loginRecord.email,
-            password: loginRecord.password,
-        });
-        console.log(body)
+        const body = JSON.stringify(loginRecord);
 
         try {
             const response = await ApiClient.sendRequest(
@@ -21,7 +17,7 @@ export class LoginUseCase {
             );
             return response.token;
         } catch (error) {
-            throw new Error(`Login failed: ${error.message}`);
+            throw error;
         }
     }
 }
