@@ -1,18 +1,14 @@
 export class TokenUtilities {
     static getToken() {
-        const token = document.cookie.split('; ').find(row => row.startsWith('auth_token='));
-        if (token) {
-            return token.split('=')[1]
-        }
-        return null;
+        return localStorage.getItem('auth_token');
     }
 
     static deleteToken() {
-        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        localStorage.removeItem('auth_token');
     }
 
     static setToken(token) {
-        document.cookie = `auth_token=${token}; path=/; samesite=strict`;
+        localStorage.setItem('auth_token', token);
     }
 
     static isAuthorized() {
