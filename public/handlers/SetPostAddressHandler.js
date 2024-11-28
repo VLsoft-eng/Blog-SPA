@@ -10,7 +10,8 @@ export class SetPostAddressHandler extends AbstractHandler{
     async handle(postGeoContainer, addressId) {
         if (addressId) {
             const addressChain = await this.getAddressChainUseCase.execute(addressId);
-            postGeoContainer.querySelector("#post-geo").innerText = addressChain[0].text;
+            postGeoContainer.querySelector("#post-geo").innerText =
+                addressChain.map(address => `${address.text}`).join(', ') || '';
         } else {
             postGeoContainer.classList.add("d-none");
         }
