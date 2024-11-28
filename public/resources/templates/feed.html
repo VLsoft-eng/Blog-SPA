@@ -1,0 +1,134 @@
+<div class="d-flex flex-column w-75">
+    <div class="w-100" id="filter-bar">
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-sm btn-primary mt-3 d-none" id = "write-post-feed-button">Написать пост</button>
+        </div>
+        <div class="card mt-2">
+            <div class="card-header p-1 h-auto">
+                <h6 class="mt-2 ms-2 fs-6 text-muted">Фильтры</h6>
+            </div>
+            <div class="card-body d-flex flex-column justify-content-between p-2">
+                <form id = "filter-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <label for="author-search" class="form-label">Поиск по имени</label>
+                                <input type="text" class="form-control form-control-sm" name="author" id="author-search" placeholder="Введите имя">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <label for="tag-search-select" class="form-label">Поиск по тегам</label>
+                                <select class="form-select form-select-sm" id="tag-search-select" name="tags" multiple size="3">
+                                    <option class="d-none" value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6 d-flex">
+                            <div class="col-8 me-1">
+                                <label for="sort-by-select" class="form-label">Сортировать</label>
+                                <select class="form-select form-select-sm" name="sorting" id="sort-by-select">
+                                    <option value="CreateDesc">По дате создания (сначала новые)</option>
+                                    <option value="CreateAsc">По дате создания (сначала старые)</option>
+                                    <option value="LikeAsc">По количеству лайков (в порядке возрастания)</option>
+                                    <option value="LikeDesc">По количеству лайков (в порядке убывания)</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="reading-time-from-input" class="form-label">Время чтения от</label>
+                                <input type="number" class="form-control form-control-sm" name="min" id="reading-time-from-input" placeholder="мин">
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex mb-2">
+                            <div class="col-4 me-1">
+                                <label for="reading-time-to-input" class="form-label">Время чтения до</label>
+                                <input type="number" class="form-control form-control-sm" name="max" id="reading-time-to-input" placeholder="мин">
+                            </div>
+                            <div class="col-4 d-flex align-self-end justify-content-center">
+                                <div class="form-check d-none" id="only-mine-check-container">
+                                    <input class="form-check-input" type="checkbox" name="onlyMyCommunities" id="only-mine-check">
+                                    <label class="form-check-label" for="only-mine-check">Только мои группы</label>
+                                </div>
+                            </div>
+                            <div class="col-4 d-flex align-self-end justify-content-end">
+                                <button type="submit" class="btn btn-sm btn-primary me-2">Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-100" id="feed-posts">
+        <div class="card d-none mt-3" data-guid = "0" data-isLiked = "true">
+            <div class="card-body">
+                <div class="card-body">
+                    <p id="post-information" class="card-text"></p>
+                    <h4 id="post-heading" class="card-title"></h4>
+                    <hr class="divider">
+                    <img id="post-image" class="img-fluid d-none mb-2" alt="Post Image" src=""/>
+                    <br>
+                    <span id="post-text" class="card-text"></span>
+                    <div class="post-footer mt-4">
+                        <p id="post-hashtags" class="card-text fs-6 text-muted"></p>
+                        <div class="d-flex align-items-center mb-2" id = "post-geo-container">
+                            <i class="bi bi-geo-alt me-2"></i>
+                            <p id="post-geo" class="mb-0 fs-6 text-muted">Penisuela</p>
+                        </div>
+                        <p id="post-reading-time" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <div>
+                    <span id="comment-count">5</span>
+                    <i class="bi bi-chat-left-text" style="cursor: pointer;"></i>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i id="like-btn" class="me-2 bi bi-heart" style="cursor: pointer;"></i>
+                    <span id="like-count">10</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-100 mt-4 mb-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                    <li class="page-item d-none" id="prev-page">
+                        <a class="page-link" href="#" data-page="" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item d-none page-num">
+                        <a class="page-link" href="#" data-page="">1</a>
+                    </li>
+
+                    <li class="page-item d-none" id="next-page">
+                        <a class="page-link" href="#" data-page="" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column align-items-end">
+                    <label for="posts-per-page-select" class="form-label mb-1">Число постов на странице</label>
+                    <select class="form-select form-select-sm" id="posts-per-page-select">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

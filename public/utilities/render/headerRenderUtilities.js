@@ -52,6 +52,7 @@ export class HeaderRenderer {
             const profileButton = document.getElementById("dropdownMenuButton");
             profileButton.innerText = profile.email;
         } catch (error) {
+            TokenUtilities.deleteToken();
             await this.renderUnauthorizedHeader();
         }
     }

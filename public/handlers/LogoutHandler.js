@@ -10,14 +10,13 @@ export class LogoutHandler extends AbstractHandler {
         this.logoutUseCase = new LogoutUseCase();
     }
 
-     async handle() {
-         try {
-             await this.logoutUseCase.execute();
-             TokenUtilities.deleteToken()
-             await router.navigate('/');
-         } catch (error) {
-             console.log(error);
-         }
-     }
+    async handle() {
+        try {
+            await this.logoutUseCase.execute();
+            TokenUtilities.deleteToken()
+            await router.navigate('/');
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
-

@@ -1,11 +1,11 @@
-import {ApiClient} from "../ApiClient.js";
 import {TokenUtilities} from "../../utilities/TokenUtilities.js";
+import {ApiClient} from "../ApiClient.js";
 
-export class GetProfileUseCase {
-    static PROFILE_URL = "/account/profile"
-    static PROFILE_METHOD = "GET"
+export class LikeUseCase {
+    static LIKE_URL = (postId) => `/post/${postId}/like`
+    static LIKE_METHOD = "POST"
 
-    async execute() {
+    async execute(postId) {
         const tokenValue = TokenUtilities.getToken()
         const headers = {};
         if (tokenValue) {
@@ -15,11 +15,11 @@ export class GetProfileUseCase {
         const body = null
 
         try {
-            return await ApiClient.sendRequest(
-                GetProfileUseCase.PROFILE_URL,
+            return await ApiClient.sendRequestEmptyResponse(
+                LikeUseCase.LIKE_URL(postId),
                 body,
                 headers,
-                GetProfileUseCase.PROFILE_METHOD
+                LikeUseCase.LIKE_METHOD
             );
         } catch (error) {
             throw error;

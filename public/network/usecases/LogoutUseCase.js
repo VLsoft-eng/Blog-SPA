@@ -6,7 +6,6 @@ export class LogoutUseCase {
     static LOGOUT_METHOD = "POST"
 
     async execute() {
-
         const tokenValue = TokenUtilities.getToken()
         const headers = {};
         if (tokenValue) {
@@ -16,7 +15,7 @@ export class LogoutUseCase {
         const body = null
 
         try {
-            return await ApiClient.sendRequest(
+            return await ApiClient.sendRequestEmptyResponse(
                 LogoutUseCase.LOGOUT_URL,
                 body,
                 headers,

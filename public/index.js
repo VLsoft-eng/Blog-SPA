@@ -17,8 +17,9 @@ const mainPageViewController = new MainPageViewController(headerRenderer);
 const profileViewController = new ProfileViewController(headerRenderer);
 
 router
-    .on('/', async function () {
-        await mainPageViewController.onLoad()
+    .on('/', async ({ queryString }) => {
+        const params = new URLSearchParams(queryString);
+        await mainPageViewController.onLoad(params);
         router.updatePageLinks();
     })
     .on('/login', async function () {
@@ -33,7 +34,7 @@ router
         await logoutViewController.onLoad();
         router.updatePageLinks();
     })
-    .on('/profile', async function () {;
+    .on('/profile', async function () {
         await profileViewController.onLoad();
         router.updatePageLinks();
     })
