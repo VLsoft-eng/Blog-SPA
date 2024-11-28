@@ -1,12 +1,12 @@
 import {renderContent} from "../utilities/render/contentRenderUtilities.js";
 import {GetPostsHandler} from "../handlers/GetPostsHandler.js";
-import {convertUrlsToLinks} from "../utilities/URLConverter.js";
 import {TokenUtilities} from "../utilities/TokenUtilities.js";
 import {LikeHandler} from "../handlers/LikeHandler.js";
 import {GetTagsHandler} from "../handlers/GetTagsHandler.js";
 import {FilterSubmitHandler} from "../handlers/FilterSubmitHandler.js";
 import {Pagination} from "../utilities/Pagination.js";
 import {SetPostAddressHandler} from "../handlers/SetPostAddressHandler.js";
+import {PostReadMoreHandler} from "../handlers/PostReadMoreHandler.js";
 
 export class MainPageViewController {
     constructor() {
@@ -15,6 +15,7 @@ export class MainPageViewController {
         this.getTagsHandler = new GetTagsHandler();
         this.filterSubmitHandler = new FilterSubmitHandler();
         this.setPostAddressHandler = new SetPostAddressHandler();
+        this.postReadMoreHandler = new PostReadMoreHandler();
         this.pagination = new Pagination();
     }
 
@@ -129,24 +130,21 @@ export class MainPageViewController {
             }).replace(',', '');
 
             const postElement = postTemplate.cloneNode(true);
-            const postTextElement = postElement.querySelector('#post-text');
-            const descriptionWithLinks = convertUrlsToLinks(post.description);
             const hashtagsElement = postElement.querySelector('#post-hashtags');
             const hashtags = post.tags.map(tag => `#${tag.name}`).join(', ') || '';
             const community = post.communityName ? `#${post.communityName}` : '';
             const postImage = postElement.querySelector('#post-image');
 
-            postElement.querySelector('#post-information').innerText = `${post.author} - ${formattedDateTime}`;
+            postElement.querySelector('#post-information').textContent = `${post.author} - ${formattedDateTime}`;
             await this.setPostAddressHandler.handle(postElement.querySelector('#post-geo-container'), post.addressId);
-            postElement.querySelector('#post-heading').innerText = post.title || '';
-            postTextElement.innerHTML = '';
-            descriptionWithLinks.forEach(node => postTextElement.appendChild(node));
-            hashtagsElement.innerText = `${hashtags}${hashtags && community ? ', ' : ''}${community}`;
-            postElement.querySelector('#post-reading-time').innerText = `Время чтения: ${post.readingTime} мин.`;
-            postElement.querySelector('#like-count').innerText = post.likes || 0;
-            postElement.querySelector('#comment-count').innerText = post.commentsCount || 0;
+            postElement.querySelector('#post-heading').textContent = post.title || '';
+            hashtagsElement.textContent = `${hashtags}${hashtags && community ? ', ' : ''}${community}`;
+            postElement.querySelector('#post-reading-time').textContent = `Время чтения: ${post.readingTime} мин.`;
+            postElement.querySelector('#like-count').textContent = post.likes || 0;
+            postElement.querySelector('#comment-count').textContent = post.commentsCount || 0;
             postElement.setAttribute('data-guid', post.id);
             postElement.setAttribute('data-isLiked', post.hasLike)
+            this.postReadMoreHandler.handle(postElement, post.description)
 
             if (post.image) {
                 postImage.classList.remove('d-none');

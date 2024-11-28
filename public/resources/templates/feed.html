@@ -1,7 +1,7 @@
 <div class="d-flex flex-column w-75">
     <div class="w-100" id="filter-bar">
         <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-sm btn-primary mt-3 d-none" id = "write-post-feed-button">Написать пост</button>
+            <a type="submit" class="btn btn-sm btn-primary mt-3 d-none" href = "/post/create" data-navigo id = "write-post-feed-button">Написать пост</a>
         </div>
         <div class="card mt-2">
             <div class="card-header p-1 h-auto">
@@ -72,6 +72,7 @@
                     <img id="post-image" class="img-fluid d-none mb-2" alt="Post Image" src=""/>
                     <br>
                     <span id="post-text" class="card-text"></span>
+                    <a href="#" id="read-more" class="text-primary d-none">Читать полностью</a>
                     <div class="post-footer mt-4">
                         <p id="post-hashtags" class="card-text fs-6 text-muted"></p>
                         <div class="d-flex align-items-center mb-2" id = "post-geo-container">

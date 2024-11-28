@@ -10,8 +10,8 @@ export function convertUrlsToLinks(text) {
 
         const link = document.createElement('a');
         link.href = match;
-        link.target = 'blank';
-        link.innerText = match
+        link.target = '_blank';
+        link.innerText = match;
         result.push(link);
 
         lastIndex = index + match.length;
@@ -21,5 +21,6 @@ export function convertUrlsToLinks(text) {
         result.push(document.createTextNode(text.slice(lastIndex)));
     }
 
+    console.log(result.length);
     return result;
 }
