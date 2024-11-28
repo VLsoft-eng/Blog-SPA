@@ -41,6 +41,5 @@ export class ApiClient {
             const errorBody = await response.json();
             throw {errorCode: response.status, errorBody: errorBody};
         }
-
     }
 }

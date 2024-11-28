@@ -120,6 +120,6 @@ export class Pagination {
 
     async onItemsPerPageChange(itemsPerPage) {
         this.itemsPerPage = itemsPerPage;
-        await this.onItemsPerPageChange();
+        await this.onParametersChangeCallBack();
     }
 }
