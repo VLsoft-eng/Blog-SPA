@@ -38,6 +38,9 @@ router
         await profileViewController.onLoad();
         router.updatePageLinks();
     })
+    .on('/post/create', async function () {
+
+    })
     .notFound(async () => {
         console.log("Not Found");
         await headerRenderer.renderHeader();

@@ -14,6 +14,7 @@ export class LikeHandler extends AbstractHandler {
         if (TokenUtilities.isAuthorized()) {
             const hasLike = postElement.getAttribute("data-isLiked") === "true";
             const likeCountElement = postElement.querySelector("#like-count");
+            const likeBtn = postElement.querySelector("#like-btn");
             let likeCount = parseInt(likeCountElement.innerText, 10) || 0;
 
             try {
@@ -27,10 +28,10 @@ export class LikeHandler extends AbstractHandler {
                     likeCount += 1;
                 }
 
-                postElement.querySelector("#like-btn").classList.toggle("text-danger");
-                postElement.querySelector("#like-btn").classList.toggle("bi-heart");
-                postElement.querySelector("#like-btn").classList.toggle("bi-heart-fill");
-                postElement.querySelector("#like-count").classList.toggle("text-danger");
+                likeBtn.classList.toggle("text-danger");
+                likeBtn.classList.toggle("bi-heart");
+                likeBtn.classList.toggle("bi-heart-fill");
+                likeCountElement.classList.toggle("text-danger");
 
                 likeCountElement.innerText = likeCount;
             } catch (error) {

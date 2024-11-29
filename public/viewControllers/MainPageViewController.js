@@ -131,20 +131,30 @@ export class MainPageViewController {
 
             const postElement = postTemplate.cloneNode(true);
             const hashtagsElement = postElement.querySelector('#post-hashtags');
+            const postHeadingElement = postElement.querySelector('#post-heading');
+            const postInformationElement = postElement.querySelector('#post-information');
+            const postReadingTimeElement = postElement.querySelector('#post-reading-time');
+            const postLikeCountElement = postElement.querySelector('#like-count');
+            const postCommentCountElement = postElement.querySelector('#comment-count');
+            const postGeoContainer = postElement.querySelector('#post-geo-container');
+            const postImage = postElement.querySelector('#post-image');
+            const postLikeButton = postElement.querySelector('#like-btn');
             const hashtags = post.tags.map(tag => `#${tag.name}`).join(', ') || '';
             const community = post.communityName ? `#${post.communityName}` : '';
-            const postImage = postElement.querySelector('#post-image');
 
-            postElement.querySelector('#post-information').textContent = `${post.author} - ${formattedDateTime}`;
-            await this.setPostAddressHandler.handle(postElement.querySelector('#post-geo-container'), post.addressId);
-            postElement.querySelector('#post-heading').textContent = post.title || '';
+
+            postInformationElement.textContent = `${post.author} - ${formattedDateTime}`;
+            postHeadingElement.textContent = post.title || '';
             hashtagsElement.textContent = `${hashtags}${hashtags && community ? ', ' : ''}${community}`;
-            postElement.querySelector('#post-reading-time').textContent = `Время чтения: ${post.readingTime} мин.`;
-            postElement.querySelector('#like-count').textContent = post.likes || 0;
-            postElement.querySelector('#comment-count').textContent = post.commentsCount || 0;
+            postReadingTimeElement.textContent = `Время чтения: ${post.readingTime} мин.`;
+            postLikeCountElement.textContent = post.likes || 0;
+            postCommentCountElement.textContent = post.commentsCount || 0;
+
             postElement.setAttribute('data-guid', post.id);
             postElement.setAttribute('data-isLiked', post.hasLike)
+
             this.postReadMoreHandler.handle(postElement, post.description)
+            await this.setPostAddressHandler.handle(postGeoContainer, post.addressId);
 
             if (post.image) {
                 postImage.classList.remove('d-none');
@@ -153,10 +163,10 @@ export class MainPageViewController {
             }
 
             if (post.hasLike) {
-                postElement.querySelector('#like-btn').classList.remove('bi-heart');
-                postElement.querySelector('#like-btn').classList.add('text-danger');
-                postElement.querySelector('#like-btn').classList.add('bi-heart-fill');
-                postElement.querySelector('#like-count').classList.add('text-danger');
+                postLikeButton.classList.remove('bi-heart');
+                postLikeButton.classList.add('text-danger');
+                postLikeButton.classList.add('bi-heart-fill');
+                postLikeCountElement.classList.add('text-danger');
             }
 
             postElement.querySelector('#like-btn').addEventListener('click', async () => {
