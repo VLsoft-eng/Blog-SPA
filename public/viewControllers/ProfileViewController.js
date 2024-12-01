@@ -3,14 +3,13 @@ import {renderContent} from "../utilities/render/contentRenderUtilities.js";
 import {UpdateProfileHandler} from "../handlers/UpdateProfileHandler.js";
 
 export class ProfileViewController {
-    constructor(headerRenderer) {
-        this.headerRenderer = headerRenderer;
+    constructor() {
         this.getProfileHandler = new GetProfileHandler();
         this.updateProfileHandler = new UpdateProfileHandler();
     }
 
     async onLoad() {
-        await this.headerRenderer.renderHeader();
+        await headerRenderer.renderHeader();
         await renderContent("/resources/templates/profile.html");
         await this.getProfileHandler.handle();
         const updateProfileForm = document.getElementById("update-profile-form");

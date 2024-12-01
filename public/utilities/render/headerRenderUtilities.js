@@ -40,7 +40,7 @@ export class HeaderRenderer {
 
     async renderUnauthorizedHeader() {
         this.updateHeaderNavLinks(this.unauthorizeNavigateElemenets);
-        this.profileContent.innerHTML = await this.fetchTemplate('resources/templates/header/unauthorizedHeaderEnd.html');
+        this.profileContent.innerHTML = await this.fetchTemplate('/resources/templates/header/unauthorizedHeaderEnd.html');
     }
 
     async renderAuthorizedHeader() {
@@ -48,7 +48,7 @@ export class HeaderRenderer {
             const profile = await this.getProfileUseCase.execute();
             this.updateHeaderNavLinks(null);
 
-            this.profileContent.innerHTML = await this.fetchTemplate('resources/templates/header/authorizedHeaderEnd.html');
+            this.profileContent.innerHTML = await this.fetchTemplate('/resources/templates/header/authorizedHeaderEnd.html');
             const profileButton = document.getElementById("dropdownMenuButton");
             profileButton.innerText = profile.email;
         } catch (error) {
@@ -58,6 +58,7 @@ export class HeaderRenderer {
     }
 
     updateHeaderNavLinks(allowedLinks) {
+        console.log(55555)
         const navLinkList = document.querySelectorAll("#nav-elements .nav-item");
         const currentRoute = window.location.pathname;
         const requiredNavLinks = this.routesNavigateElemenets.get(currentRoute) || this.routesNavigateElemenets.get('/');

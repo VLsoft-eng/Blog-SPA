@@ -1,20 +1,22 @@
-import {HeaderRenderer} from "./utilities/render/headerRenderUtilities.js";
-import {renderContent} from "./utilities/render/contentRenderUtilities.js";
-import {LoginViewController} from "./ViewControllers/LoginViewController.js";
-import {LogoutViewController} from "./ViewControllers/LogoutViewController.js";
-import {RegisterViewController} from "./ViewControllers/RegisterViewController.js";
-import {MainPageViewController} from "./ViewControllers/MainPageViewController.js";
-import {ProfileViewController} from "./ViewControllers/ProfileViewController.js";
+import {HeaderRenderer} from "/utilities/render/headerRenderUtilities.js";
+import {renderContent} from "/utilities/render/contentRenderUtilities.js";
+import {LoginViewController} from "/ViewControllers/LoginViewController.js";
+import {LogoutViewController} from "/ViewControllers/LogoutViewController.js";
+import {RegisterViewController} from "/ViewControllers/RegisterViewController.js";
+import {MainPageViewController} from "/ViewControllers/MainPageViewController.js";
+import {ProfileViewController} from "/ViewControllers/ProfileViewController.js";
+import {PostDetailsViewController} from "/viewControllers/PostDetailsViewController.js";
 
 
 export const router = new Navigo("/");
 
 window.headerRenderer = new HeaderRenderer();
-const loginViewController = new LoginViewController(headerRenderer);
-const logoutViewController = new LogoutViewController(headerRenderer);
-const registerViewController = new RegisterViewController(headerRenderer);
-const mainPageViewController = new MainPageViewController(headerRenderer);
-const profileViewController = new ProfileViewController(headerRenderer);
+const loginViewController = new LoginViewController();
+const logoutViewController = new LogoutViewController();
+const registerViewController = new RegisterViewController();
+const mainPageViewController = new MainPageViewController();
+const profileViewController = new ProfileViewController();
+const postDetailsViewController = new PostDetailsViewController();
 
 router
     .on('/', async ({ queryString }) => {
@@ -39,7 +41,9 @@ router
         router.updatePageLinks();
     })
     .on('/post/create', async function () {
-
+        console.log("post details")
+        await postDetailsViewController.onLoad();
+        router.updatePageLinks();
     })
     .notFound(async () => {
         console.log("Not Found");

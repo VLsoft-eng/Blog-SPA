@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
+    "connect-history-api-fallback": "^2.0.0",
     "express": "^4.21.1"
   }
 }
