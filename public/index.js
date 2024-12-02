@@ -40,9 +40,8 @@ router
         await profileViewController.onLoad();
         router.updatePageLinks();
     })
-    .on('/post/create', async function () {
-        console.log("post details")
-        await postDetailsViewController.onLoad();
+    .on('/post/:id', async function ({data}) {
+        await postDetailsViewController.onLoad(data);
         router.updatePageLinks();
     })
     .notFound(async () => {

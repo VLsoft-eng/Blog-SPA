@@ -1,22 +1,20 @@
 <div class="d-flex flex-column w-75">
-    <div class="card mt-3" data-guid="0" data-isLiked="true">
+    <div class="card d-none mt-3" data-guid="0" data-isLiked="true">
         <div class="card-body">
-            <div class="card-body">
-                <p id="post-information" class="card-text"></p>
-                <h4 id="post-heading" class="card-title"></h4>
-                <hr class="divider">
-                <img id="post-image" class="d-none mb-2 w-25 h-25 object-fit-cover" alt="Post Image" src=""/>
-                <br>
-                <span id="post-text" class="card-text"></span>
-                <a href="#" id="read-more" class="text-primary d-none d-block">Читать полностью</a>
-                <div class="post-footer mt-4">
-                    <p id="post-hashtags" class="card-text fs-6 text-muted"></p>
-                    <div class="d-flex align-items-center mb-2" id="post-geo-container">
-                        <i class="bi bi-geo-alt me-2"></i>
-                        <p id="post-geo" class="mb-0 fs-6 text-muted"></p>
-                    </div>
-                    <p id="post-reading-time" class="card-text"></p>
+            <p id="post-information" class="card-text"></p>
+            <h4 id="post-heading" class="card-title"></h4>
+            <hr class="divider">
+            <img id="post-image" class="d-none mb-2 w-25 h-25 object-fit-cover" alt="Post Image" src=""/>
+            <br>
+            <span id="post-text" class="card-text"></span>
+            <a href="#" id="read-more" class="text-primary d-none d-block">Читать полностью</a>
+            <div class="post-footer mt-4">
+                <p id="post-hashtags" class="card-text fs-6 text-muted"></p>
+                <div class="d-flex align-items-center mb-2" id="post-geo-container">
+                    <i class="bi bi-geo-alt me-2"></i>
+                    <p id="post-geo" class="mb-0 fs-6 text-muted"></p>
                 </div>
+                <p id="post-reading-time" class="card-text"></p>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
@@ -29,5 +27,72 @@
                 <span id="like-count">10</span>
             </div>
         </div>
+    </div>
+    <div class="card mt-3">
+        <h5 class="card-title mt-3 ms-3">Комментарии</h5>
+        <div id = template>
+            <div id = "comment-template" class="comment d-none mb-3" data-guid="0">
+                <div class="comment-header d-flex align-items-center">
+                    <span class="comment-author fs-6 ">Автор</span>
+                    <div class="comment-icons ms-2">
+                        <i id = "edit-link" class="bi bi-pencil-fill text-warning d-none" data-bs-toggle="collapse"
+                           data-bs-target="#edit-input" style="cursor: pointer;"></i>
+                        <i id = "delete-link" class="bi bi-trash-fill text-danger d-none" style="cursor: pointer;"></i>
+                    </div>
+                </div>
+
+                <div class="comment-body d-flex align-items-center">
+                    <p id = "comment-text" class="fs-5 mb-1 me-1">ПРИВЕТ САСУНКИ АААААААААААА</p>
+                    <label id = "comment-edited" class="text-muted d-none fs-6 mb-0 ">(изменен)</label>
+                </div>
+
+                <div class="comment-footer d-flex align-items-center mb-1">
+                    <span class="comment-time fs-6 mb-0 me-2">time time</span>
+                    <a href="#" id ="reply-link" class="d-none text-primary text-decoration-none fs-6" data-bs-toggle="collapse"
+                       data-bs-target="#reply-input">Ответить</a>
+                </div>
+                <a href="#" id = "replies-link" class="text-primary text-decoration-none d-none" data-bs-toggle="collapse"
+                   data-bs-target=".replies-container">Раскрыть ответы</a>
+
+                <div id = "reply-input" class="collapse mt-3">
+                    <div class="d-flex align-items-center">
+                        <input type="text" class="form-control me-2" placeholder="Оставьте комментарий...">
+                        <button class="btn btn-primary">Отправить</button>
+                    </div>
+                </div>
+                <div class="collapse mt-3" id = "edit-input">
+                    <div class="d-flex align-items-center">
+                        <input type="text" class="form-control me-2" placeholder="Отредактируйте комментарий...">
+                        <button  class="btn btn-warning">Редактировать</button>
+                    </div>
+                </div>
+
+                <div id = "replies-container" class="collapse mt-3">
+                    <div class="d-flex">
+                        <div class="border-start border-3 border-info me-3"></div>
+                        <div class="replies">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id = "comments" class="card-body">
+
+        </div>
+    </div>
+    <div class="card mt-3 mb-3">
+        <form id="comment-form">
+            <div class="card-body">
+                <span class="card-title">Оставьте комментарий</span>
+
+                <div class="mb-3 mt-3">
+                    <textarea class="form-control" id="comment-input" rows="5" placeholder="Введите ваш комментарий..." required></textarea>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

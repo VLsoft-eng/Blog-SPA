@@ -15,12 +15,15 @@ export class GetProfileUseCase {
         const body = null
 
         try {
-            return await ApiClient.sendRequest(
+            const profileInfo = await ApiClient.sendRequest(
                 GetProfileUseCase.PROFILE_URL,
                 body,
                 headers,
                 GetProfileUseCase.PROFILE_METHOD
             );
+            TokenUtilities.setCurrentUserId(profileInfo.id);
+
+            return profileInfo;
         } catch (error) {
             throw error;
         }

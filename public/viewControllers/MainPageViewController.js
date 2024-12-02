@@ -145,6 +145,7 @@ export class MainPageViewController {
 
             postInformationElement.textContent = `${post.author} - ${formattedDateTime}`;
             postHeadingElement.textContent = post.title || '';
+            postHeadingElement.href = "/post/" + post.id;
             hashtagsElement.textContent = `${hashtags}${hashtags && community ? ', ' : ''}${community}`;
             postReadingTimeElement.textContent = `Время чтения: ${post.readingTime} мин.`;
             postLikeCountElement.textContent = post.likes || 0;

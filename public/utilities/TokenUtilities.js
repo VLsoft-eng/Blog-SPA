@@ -15,4 +15,12 @@ export class TokenUtilities {
         const token = TokenUtilities.getToken();
         return !!token;
     }
+
+    static setCurrentUserId(userId) {
+        localStorage.setItem('user_id', userId);
+    }
+
+    static getCurrentUserId() {
+        return localStorage.getItem('user_id');
+    }
 }

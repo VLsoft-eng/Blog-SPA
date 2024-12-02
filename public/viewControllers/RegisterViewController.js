@@ -20,6 +20,5 @@ export class RegisterViewController {
         });
 
         registerForm.addEventListener('submit',  (e) => this.registerHandler.handle(e));
-
     }
 }

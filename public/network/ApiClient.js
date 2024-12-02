@@ -18,9 +18,12 @@ export class ApiClient {
         if (response.ok) {
             return await response.json();
         } else {
-            const errorBody = await response.json();
-            console.log(0)
-            throw {errorCode: response.status, errorBody: errorBody};
+            const contentLength = response.headers.get('Content-Length');
+            const errorBody = contentLength && parseInt(contentLength) > 0
+                ? await response.json()
+                : "Unknown error occurred.";
+
+            throw { errorCode: response.status, errorBody: errorBody };
         }
     }
 
