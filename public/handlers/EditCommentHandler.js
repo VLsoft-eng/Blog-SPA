@@ -13,6 +13,7 @@ export class EditCommentHandler extends AbstractHandler {
         const editInputContainer = commentElement.querySelector('#edit-input-' + commentId);
         const editInput = editInputContainer.querySelector('.form-control');
         const editSubmitButton = editInputContainer.querySelector('.btn');
+        commentTextElement.classList.toggle('d-none');
 
         editInput.value = commentTextElement.textContent;
         editSubmitButton.addEventListener('click', async () => {
@@ -26,6 +27,8 @@ export class EditCommentHandler extends AbstractHandler {
                 commentEditedLabel.classList.remove('d-none');
             } catch (error) {
                 console.log("editing error");
+            } finally {
+                commentTextElement.classList.toggle('d-none');
             }
         })
     }

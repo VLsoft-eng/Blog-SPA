@@ -235,6 +235,7 @@ export class PostDetailsViewController {
         commentForm.addEventListener('submit', async (e) => {
             await this.createCommentHandler.handle(e, postId, commentForm);
             const commentArea = document.querySelector('#comments');
+            commentArea.innerHTML = '';
 
             const postDetails = await this.getPostDetailsHandler.handle(postId);
             await this.displayComments(postDetails.comments, commentArea, null, postDetails.id);

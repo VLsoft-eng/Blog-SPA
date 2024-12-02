@@ -5,6 +5,7 @@ export class TokenUtilities {
 
     static deleteToken() {
         localStorage.removeItem('auth_token');
+        this.deleteCurrentUserId();
     }
 
     static setToken(token) {
@@ -18,6 +19,10 @@ export class TokenUtilities {
 
     static setCurrentUserId(userId) {
         localStorage.setItem('user_id', userId);
+    }
+
+    static deleteCurrentUserId() {
+        localStorage.removeItem('user_id');
     }
 
     static getCurrentUserId() {
