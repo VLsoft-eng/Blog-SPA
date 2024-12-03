@@ -33,10 +33,14 @@ export class PostDetailsViewController {
             await this.displayPost(postDetails);
             const commentArea = document.querySelector('#comments');
             await this.displayComments(postDetails.comments, commentArea, null, postDetails.id);
-            this.configureCommentInput(postDetails.id)
+            await this.configureCommentInput(postDetails.id)
         } catch (error) {
             if (error.errorCode === 404) {
                 await router.navigate("/none-exist");
+            }
+
+            if (error.errorCode === 403) {
+                await renderContent("/resources/templates/forbidden.html");
             }
         }
     }

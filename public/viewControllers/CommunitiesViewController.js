@@ -28,7 +28,7 @@ export class CommunitiesViewController {
 
             communityTextElement.textContent = community.name;
             communityElement.setAttribute("data-guid", community.id);
-            communityTextElement.href = "/community" + community.id;
+            communityTextElement.href = "/community/" + community.id;
 
             if (!TokenUtilities.isAuthorized()) {
                 communityElement.classList.remove('d-none');

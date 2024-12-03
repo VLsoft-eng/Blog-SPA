@@ -7,6 +7,7 @@ import {MainPageViewController} from "/ViewControllers/MainPageViewController.js
 import {ProfileViewController} from "/ViewControllers/ProfileViewController.js";
 import {PostDetailsViewController} from "/viewControllers/PostDetailsViewController.js";
 import {CommunitiesViewController} from "/viewControllers/CommunitiesViewController.js";
+import {CommunityDetailsViewController} from "/viewControllers/CommunityDetailsViewController.js";
 
 
 export const router = new Navigo("/");
@@ -19,6 +20,7 @@ const mainPageViewController = new MainPageViewController();
 const profileViewController = new ProfileViewController();
 const postDetailsViewController = new PostDetailsViewController();
 const communitiesViewController = new CommunitiesViewController();
+const communityDetailsViewController = new CommunityDetailsViewController();
 
 
 router
@@ -49,6 +51,11 @@ router
     })
     .on('/communities', async function () {
         await communitiesViewController.onLoad();
+        router.updatePageLinks();
+    })
+    .on('/community/:id', async function ({ data, queryString }) {
+        const params = new URLSearchParams(queryString);
+        await communityDetailsViewController.handle(data, params);
         router.updatePageLinks();
     })
     .notFound(async () => {

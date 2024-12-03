@@ -110,7 +110,7 @@ export class MainPageViewController {
         paginationParams.page = this.pagination.currentPage;
         paginationParams.size = this.pagination.itemsPerPage;
 
-        await this.filterSubmitHandler.handle(filterForm, paginationParams);
+        await this.filterSubmitHandler.handle(filterForm, paginationParams, "/");
     }
 
     async displayPosts(posts) {

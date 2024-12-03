@@ -1,0 +1,155 @@
+<div class="d-flex flex-column w-75">
+    <div class="w-100">
+        <div class="card mt-2" id="group-card" data-guid = "0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 id = "community-name" class="fw-bold mb-0">"</h4>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm me-2 d-none">Написать пост</button>
+                        <button class="btn unsub btn-danger btn-sm me-2 d-none">Отписаться</button>
+                        <button class="btn sub btn-primary btn-sm me-2 d-none">Подписаться</button>
+                    </div>
+                </div>
+                <p class="text-muted mb-0 mt-4">
+                    <span id = "community-subscribers-count" class="me-2"><i class="bi bi-people"></i> 7 подписчиков</span><br>
+                    <span id = "community-type">Тип сообщества: закрыто</span>
+                </p>
+            </div>
+            <div class="card-body">
+                <h6 class="fw-bold">Администраторы</h6>
+                <ul class="list-group" id = "community-admins-list">
+                    <li class="list-group-item d-flex align-items-center female-profile d-none">
+                        <div class="position-relative me-3">
+                            <img src="/resources/avatars/{670ADCF9-1016-4B4B-ACDD-FAC39DC0DB99}.png" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;">
+                            <i class="fas fa-crown position-absolute top-0 start-50 translate-middle-x text-success"></i>
+                        </div>
+                        <div>
+                            <a href="#" class="text-decoration-none fw-bold text-dark user-name">user</a><br>
+                            <span class="text-muted d-none user-create-time">Создан: 21.12.2022</span><br>
+                            <span class="text-muted d-none user-birthday">Дата рождения: 15.02.2000</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center male-profile d-none">
+                        <div class="position-relative me-3">
+                            <img src="/resources/avatars/{16C0810A-CF51-4B06-B00F-894B202827C9}.png" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;">
+                            <i class="fas fa-crown position-absolute top-0 start-50 translate-middle-x text-success"></i>
+                        </div>
+                        <div>
+                            <a href="#" class="text-decoration-none fw-bold text-dark user-name">user</a><br>
+                            <span class="text-muted d-none user-create-time">Создан: 21.12.2022</span><br>
+                            <span class="text-muted d-none user-birthday">Дата рождения: 15.02.2000</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="w-100" id="filter-bar">
+        <div class="card mt-2">
+            <div class="card-header p-1 h-auto">
+                <h6 class="mt-2 ms-2 fs-6 text-muted">Фильтры</h6>
+            </div>
+            <div class="card-body d-flex flex-column justify-content-between p-2">
+                <form id="filter-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <label for="sort-by-select" class="form-label">Сортировать</label>
+                                <select class="form-select form-select-sm" name="sorting" id="sort-by-select">
+                                    <option value="CreateDesc">По дате создания (сначала новые)</option>
+                                    <option value="CreateAsc">По дате создания (сначала старые)</option>
+                                    <option value="LikeAsc">По количеству лайков (в порядке возрастания)</option>
+                                    <option value="LikeDesc">По количеству лайков (в порядке убывания)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <label for="tag-search-select" class="form-label">Поиск по тегам</label>
+                                <select class="form-select form-select-sm" id="tag-search-select" name="tags" multiple size="3">
+                                    <option class="d-none" value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-sm btn-primary">Применить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="w-100" id="feed-posts">
+        <div class="card d-none mt-3" data-guid = "0" data-isLiked = "true">
+            <div class="card-body">
+                <p id="post-information" class="card-text"></p>
+                <a id="post-heading" href="/post" data-navigo class="card-title fw-bold text-decoration-none fs-3" ></a>
+                <hr class="divider">
+                <img id="post-image" class="mx-auto d-block d-none mb-2 w-25 h-25 object-fit-cover" alt="Post Image" src=""/>
+                <br>
+                <span id="post-text" class="card-text"></span>
+                <a href="#" id="read-more" class="text-primary d-none d-block">Читать полностью</a>
+                <div class="post-footer mt-4">
+                    <p id="post-hashtags" class="card-text fs-6 text-muted"></p>
+                    <div class="d-flex align-items-center mb-2" id = "post-geo-container">
+                        <i class="bi bi-geo-alt me-2"></i>
+                        <p id="post-geo" class="mb-0 fs-6 text-muted"></p>
+                    </div>
+                    <p id="post-reading-time" class="card-text"></p>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <div>
+                    <span id="comment-count">5</span>
+                    <i class="bi bi-chat-left-text" style="cursor: pointer;"></i>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i id="like-btn" class="me-2 bi bi-heart" style="cursor: pointer;"></i>
+                    <span id="like-count">10</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-100 mt-4 mb-5">
+        <div id = "pagination-options" class="d-flex justify-content-between align-items-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                    <li class="page-item d-none" id="prev-page">
+                        <a class="page-link" href="#" data-page="" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item d-none page-num">
+                        <a class="page-link" href="#" data-page="">1</a>
+                    </li>
+
+                    <li class="page-item d-none" id="next-page">
+                        <a class="page-link" href="#" data-page="" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column align-items-end">
+                    <label for="posts-per-page-select" class="form-label mb-1">Число постов на странице</label>
+                    <select class="form-select form-select-sm" id="posts-per-page-select">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
