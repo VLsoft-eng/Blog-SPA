@@ -9,6 +9,7 @@ import {FilterSubmitHandler} from "/handlers/FilterSubmitHandler.js";
 import {PostReadMoreHandler} from "/handlers/PostReadMoreHandler.js";
 import {SetPostAddressHandler} from "/handlers/SetPostAddressHandler.js";
 import {LikeHandler} from "/handlers/LikeHandler.js";
+import {GetCommunityRoleHandler} from "/handlers/GetCommunityRoleHandler.js";
 
 export class CommunityDetailsViewController {
     constructor() {
@@ -21,6 +22,7 @@ export class CommunityDetailsViewController {
         this.postReadMoreHandler = new PostReadMoreHandler();
         this.setPostAddressHandler = new SetPostAddressHandler();
         this.likeHandler = new LikeHandler();
+        this.getCommunityRoleHandler = new GetCommunityRoleHandler();
     }
 
     async handle(data, params) {
@@ -105,6 +107,12 @@ export class CommunityDetailsViewController {
 
         if (!TokenUtilities.isAuthorized()) {
             return;
+        }
+
+        const communityUserRole = this.getCommunityRoleHandler(communityDetails.id)
+        if (communityUserRole === "Administrator") {
+            const communityWritePostButton = communityElement.querySelector(".write-post-btn");
+            communityWritePostButton.classList.remove("d-none");
         }
 
         await this.communityActionHndler.handle(communityElement);

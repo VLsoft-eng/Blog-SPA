@@ -8,6 +8,7 @@ import {ProfileViewController} from "/ViewControllers/ProfileViewController.js";
 import {PostDetailsViewController} from "/viewControllers/PostDetailsViewController.js";
 import {CommunitiesViewController} from "/viewControllers/CommunitiesViewController.js";
 import {CommunityDetailsViewController} from "/viewControllers/CommunityDetailsViewController.js";
+import {AuthorsViewController} from "/viewControllers/AuthorsViewController.js";
 
 
 export const router = new Navigo("/");
@@ -21,6 +22,7 @@ const profileViewController = new ProfileViewController();
 const postDetailsViewController = new PostDetailsViewController();
 const communitiesViewController = new CommunitiesViewController();
 const communityDetailsViewController = new CommunityDetailsViewController();
+const authorsViewController = new AuthorsViewController();
 
 
 router
@@ -57,6 +59,11 @@ router
         const params = new URLSearchParams(queryString);
         await communityDetailsViewController.handle(data, params);
         router.updatePageLinks();
+    })
+    .on('/authors', async function () {
+        await authorsViewController.handle();
+        router.updatePageLinks();
+
     })
     .notFound(async () => {
         console.log("Not Found");
