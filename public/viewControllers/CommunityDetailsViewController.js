@@ -15,7 +15,7 @@ export class CommunityDetailsViewController {
     constructor() {
         this.pagination = new Pagination();
         this.getCommunityDetailsHandler = new GetCommunityDetailsHandler();
-        this.communityActionHndler = new CommunityActionHandler();
+        this.communityActionHandler = new CommunityActionHandler();
         this.getCommunityPostsHandler = new GetCommunityPostsHandler();
         this.getTagsHandler = new GetTagsHandler();
         this.filterSubmitHandler = new FilterSubmitHandler();
@@ -35,9 +35,7 @@ export class CommunityDetailsViewController {
             const itemsPerPageSelector = document.getElementById('posts-per-page-select');
             await this.configureFiltersUi(params);
             await this.displayCommunity(communityDetails);
-
             this.communityId = communityDetails.id;
-
             const postsInfo = await this.getCommunityPostsHandler.handle(params, data.id);
 
             this.pagination.updateOptions(paginationContainer, itemsPerPageSelector, {
@@ -49,7 +47,6 @@ export class CommunityDetailsViewController {
 
             this.pagination.updatePagination();
             this.pagination.updateItemsPerPageSelect();
-
             await this.displayPosts(postsInfo.posts);
 
         } catch (error) {
@@ -66,7 +63,7 @@ export class CommunityDetailsViewController {
 
     async displayCommunity(communityDetails) {
         const communityElement = document.querySelector("#group-card");
-        const administratorsListElement = communityElement.querySelector("#community-admins-list")
+        const administratorsListElement = communityElement.querySelector("#community-admins-list");
         const femaleAdminTemplate = administratorsListElement.querySelector(".female-profile");
         const maleAdminTemplate = administratorsListElement.querySelector(".male-profile");
         const subscribersCountElement = communityElement.querySelector("#community-subscribers-count");
@@ -78,7 +75,6 @@ export class CommunityDetailsViewController {
 
         const adminsList = communityDetails.administrators;
         for (const admin of adminsList) {
-            console.log(admin)
             if (admin.gender === "Male") {
                 const maleUserElement = maleAdminTemplate.cloneNode(true);
                 const userNameElement = maleUserElement.querySelector(".user-name");
@@ -102,20 +98,20 @@ export class CommunityDetailsViewController {
             communityTypeElement.textContent = "Тип сообщества: открытое";
         }
 
-
         communityNameElement.textContent = communityNameFormat(communityDetails.name);
 
         if (!TokenUtilities.isAuthorized()) {
             return;
         }
 
-        const communityUserRole = this.getCommunityRoleHandler(communityDetails.id)
+        const communityUserRole = await this.getCommunityRoleHandler.handle(communityDetails.id)
         if (communityUserRole === "Administrator") {
             const communityWritePostButton = communityElement.querySelector(".write-post-btn");
             communityWritePostButton.classList.remove("d-none");
         }
 
-        await this.communityActionHndler.handle(communityElement);
+        await this.communityActionHandler.handle(communityElement);
+        communityElement.classList.remove('d-none');
     }
 
     async configureFiltersUi(params) {
@@ -173,7 +169,6 @@ export class CommunityDetailsViewController {
             }).replace(',', '');
 
             const postElement = postTemplate.cloneNode(true);
-            console.log(postElement)
             const hashtagsElement = postElement.querySelector('#post-hashtags');
             const postHeadingElement = postElement.querySelector('#post-heading');
             const postInformationElement = postElement.querySelector('#post-information');
@@ -195,17 +190,12 @@ export class CommunityDetailsViewController {
             postLikeCountElement.textContent = post.likes || 0;
             postCommentCountElement.textContent = post.commentsCount || 0;
 
-            console.log(postElement)
-
             postElement.setAttribute('data-guid', post.id);
             postElement.setAttribute('data-isLiked', post.hasLike)
-
-            console.log(postElement)
 
             this.postReadMoreHandler.handle(postElement, post.description)
             await this.setPostAddressHandler.handle(postGeoContainer, post.addressId);
 
-            console.log(postElement)
 
             if (post.image) {
                 postImage.classList.remove('d-none');
@@ -220,7 +210,6 @@ export class CommunityDetailsViewController {
                 postLikeCountElement.classList.add('text-danger');
             }
 
-            console.log(postElement)
 
             postElement.querySelector('#like-btn').addEventListener('click', async () => {
                 await this.likeHandler.handle(postElement)
