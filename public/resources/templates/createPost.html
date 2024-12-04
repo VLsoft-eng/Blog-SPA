@@ -1,0 +1,57 @@
+<div class="d-flex flex-column w-75">
+    <div class="card mt-5 mb-5">
+        <div class="card-body">
+            <h1 class="mb-4">Написать новый пост</h1>
+            <form id = "post-create-form">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="post-title" class="form-label">Название</label>
+                        <input type="text" class="form-control" id="post-title" placeholder="Введите название">
+                        <div id="post-title-error" class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="reading-time" class="form-label">Время чтения</label>
+                        <input type="number" class="form-control" id="reading-time" placeholder="Время в минутах">
+                        <div id="reading-time-error" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="group-selector" class="form-label">Группа</label>
+                        <select class="form-select" id="group-selector">
+                            <option value = "without" class = "group-select-option">Без группы</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tags-select" class="form-label">Теги</label>
+                        <select class="form-select" id="tags-select" multiple>
+                            <option class="d-none" value=""></option>
+                        </select>
+                        <div id="tags-select-error" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image-url" class="form-label">Ссылка на картинку</label>
+                    <input type="url" class="form-control" id="image-url" placeholder="Введите URL изображения">
+                    <div id="image-url-error" class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="post-text" class="form-label">Текст</label>
+                    <textarea class="form-control" id="post-text" rows="5" placeholder="Введите текст"></textarea>
+                    <div id="post-text-error" class="invalid-feedback"></div>
+                </div>
+                <div id = "address-selectors">
+                    <div class="mb-3 address-selector d-none">
+                        <label for="region-select" class="form-label"></label>
+                        <select class="form-select region-selector" id="region-select">
+                            <option selected value = "0">Не выбрано</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary" id = "pos-create-submit-button">Создать пост</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

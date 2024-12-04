@@ -2,6 +2,7 @@ export class AbstractHandler {
     constructor() {}
 
     markInvalidFields(errors) {
+        console.log(errors);
         errors.forEach((error) => {
             const element = document.getElementById(error.field);
             if (element) {

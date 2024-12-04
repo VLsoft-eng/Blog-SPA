@@ -58,7 +58,6 @@ export class HeaderRenderer {
     }
 
     updateHeaderNavLinks(allowedLinks) {
-        console.log(55555)
         const navLinkList = document.querySelectorAll("#nav-elements .nav-item");
         const currentRoute = window.location.pathname;
         const requiredNavLinks = this.routesNavigateElemenets.get(currentRoute) || this.routesNavigateElemenets.get('/');

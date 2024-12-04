@@ -34,13 +34,23 @@ export class PostDetailsViewController {
             const commentArea = document.querySelector('#comments');
             await this.displayComments(postDetails.comments, commentArea, null, postDetails.id);
             await this.configureCommentInput(postDetails.id)
+
+            if (window.commentScrollState === true) {
+                commentArea.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+
+                window.commentScrollState = false;
+            }
         } catch (error) {
             if (error.errorCode === 404) {
-                await router.navigate("/none-exist");
+                await router.navigate("/notFound");
+                return;
             }
 
             if (error.errorCode === 403) {
-                await renderContent("/resources/templates/forbidden.html");
+                await router.navigate(("/forbidden"));
             }
         }
     }
@@ -100,6 +110,11 @@ export class PostDetailsViewController {
         postLikeButton.addEventListener('click', async () => {
             await this.likeHandler.handle(postElement)
         })
+
+        if (!TokenUtilities.isAuthorized()) {
+            const commentCreateCard = document.querySelector('.comment-card');
+            commentCreateCard.classList.add('d-none');
+        }
 
         postElement.classList.remove('d-none');
     }
@@ -177,7 +192,6 @@ export class PostDetailsViewController {
 
                 try {
                     const replies = await this.getCommentChainHandler.handle(comment.id)
-                    console.log(replies);
                     await this.displayComments(replies, subCommentsArea, comment.id, postId);
 
                     const repliesLink = commentElement.querySelector('#replies-link-' + comment.id);

@@ -67,7 +67,7 @@ export class UserValidator {
         }
 
         if (!this.isPasswordValid(RegisterRecord.password)) {
-            this.errors.push({ field: 'password-register-input', message: 'Пароль не может содержать русские буквы, пробелы ' +
+            this.errors.push({ field: 'password-register-input', message: 'Пароль может содержать только латинские символы,c=' +
                     'и должен содержать хотя бы одну цифру' });
             this.isValid = false;
         }
@@ -121,7 +121,7 @@ export class UserValidator {
     }
 
     static isPasswordValid(password) {
-        const passwordFormat = /^(?!.*[а-яА-ЯёЁ\s])\S{6,}$/;
+        const passwordFormat = /^[a-zA-Z0-9!@#$%^&*(),.?":{}|<>~`_\-+=\[\]\\\/]{6,}$/;
         return passwordFormat.test(password);
     }
 }

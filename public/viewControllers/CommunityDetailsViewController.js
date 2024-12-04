@@ -108,6 +108,9 @@ export class CommunityDetailsViewController {
         if (communityUserRole === "Administrator") {
             const communityWritePostButton = communityElement.querySelector(".write-post-btn");
             communityWritePostButton.classList.remove("d-none");
+            communityWritePostButton.addEventListener('click',  () => {
+                window.postCreateState = {id: communityDetails.id};
+            })
         }
 
         await this.communityActionHandler.handle(communityElement);

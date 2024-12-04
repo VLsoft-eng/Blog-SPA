@@ -7,6 +7,7 @@ import {FilterSubmitHandler} from "../handlers/FilterSubmitHandler.js";
 import {Pagination} from "../utilities/Pagination.js";
 import {SetPostAddressHandler} from "../handlers/SetPostAddressHandler.js";
 import {PostReadMoreHandler} from "../handlers/PostReadMoreHandler.js";
+import {router} from "../index.js";
 
 export class MainPageViewController {
     constructor() {
@@ -141,6 +142,7 @@ export class MainPageViewController {
             const postLikeButton = postElement.querySelector('#like-btn');
             const hashtags = post.tags.map(tag => `#${tag.name}`).join(', ') || '';
             const community = post.communityName ? `#${post.communityName}` : '';
+            const postCommentButton = postElement.querySelector('#comment-btn');
 
 
             postInformationElement.textContent = `${post.author} - ${formattedDateTime}`;
@@ -172,6 +174,11 @@ export class MainPageViewController {
 
             postElement.querySelector('#like-btn').addEventListener('click', async () => {
                 await this.likeHandler.handle(postElement)
+            })
+
+            postCommentButton.addEventListener('click', async () => {
+                window.commentScrollState = true;
+                await router.navigate("/post/" + post.id);
             })
 
             feedContainer.appendChild(postElement);
