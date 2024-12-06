@@ -9,7 +9,22 @@ export class AddressSearchHandler extends AbstractHandler{
 
     async handle (params) {
         try{
-            return await this.addressSearchUseCase.execute(params);
+            const urlParams = new URLSearchParams();
+            if (params.query !== undefined && params.query !== "") {
+                urlParams.append("query", params.query);
+            }
+
+            if (params.parentObjectId !== undefined && params.parentObjectId !== null) {
+                urlParams.append("parentObjectId", params.parentObjectId);
+            }
+            const data = await this.addressSearchUseCase.execute(urlParams);
+            return data.map(item => ({
+                id: item.objectId,
+                text: item.text,
+                objectGuid: item.objectGuid,
+                objectLevel: item.objectLevel,
+                objectLevelText: item.objectLevelText,
+            }));
         } catch (error) {
             console.error(error);
         }

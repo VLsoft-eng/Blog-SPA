@@ -5,7 +5,7 @@ export class GetAddressSearchUseCase {
     static ADDRESS_SEARCH_URL = "/address/search";
     static ADDRESS_SEARCH_METHOD = "GET"
 
-    async execute(params) {
+    async execute(params, parentObjectId) {
         const pathWithQuery = `${GetAddressSearchUseCase.ADDRESS_SEARCH_URL}?${params.toString()}`;
         console.log(pathWithQuery, "pwh");
 
@@ -14,6 +14,7 @@ export class GetAddressSearchUseCase {
         if (tokenValue) {
             headers['Authorization'] = `Bearer ${tokenValue}`;
         }
+
 
         try {
             return await ApiClient.sendRequest(pathWithQuery, null, headers, GetAddressSearchUseCase.ADDRESS_SEARCH_METHOD);

@@ -5,6 +5,7 @@ import {GetMyCommunitiesHandler} from "/handlers/GetMyCommunitiesHandler.js";
 import {TokenUtilities} from "/utilities/TokenUtilities.js";
 import {CreatePostHandler} from "/handlers/CreatePostHandler.js";
 import {router} from "/index.js";
+import {AddressSearchHandler} from "/handlers/AddressSearchHandler.js";
 
 export class PostCreateViewController {
     constructor() {
@@ -14,6 +15,7 @@ export class PostCreateViewController {
         this.getTagsHandler = new GetTagsHandler();
         this.getCommunityDetailsHandler = new GetCommunityDetailsHandler();
         this.getMyCommunitiesHandler = new GetMyCommunitiesHandler();
+        this.addressSearchHandler = new AddressSearchHandler();
     }
 
     async onLoad() {
@@ -66,32 +68,28 @@ export class PostCreateViewController {
         await this.addNewSelector({id: null});
     }
 
-    initializeSelector(selector, parentObjectId) {
+     initializeSelector(selector, parentObjectId) {
         $(selector).select2({
             placeholder: "Выберите элемент адреса",
             ajax: {
-                url: "https://blog.kreosoft.space/api/address/search",
+                transport: async (params, success, failure) => {
+                    try {
+                        const results = await this.addressSearchHandler.handle(params.data);
+                        success({ results: results });
+                    } catch (error) {
+                        console.error("Error fetching address data:", error);
+                        failure(error);
+                    }
+                },
                 dataType: "json",
                 delay: 250,
                 data: (params) => ({
                     query: params.term,
                     parentObjectId: parentObjectId || null
                 }),
-                processResults: (data) => {
-                    return {
-                        results: data.map(item => ({
-                            id: item.objectId,
-                            objectGuid: item.objectGuid,
-                            text: item.text,
-                            objectLevel: item.objectLevel,
-                            objectLevelText: item.objectLevelText,
-                            'data-object-guid': item.objectGuid
-                        }))
-                    };
-                },
                 cache: true
             },
-            minimumInputLength: 1
+            minimumInputLength: 0
         });
     }
 
