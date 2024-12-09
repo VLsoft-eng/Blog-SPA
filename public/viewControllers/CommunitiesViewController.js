@@ -2,6 +2,7 @@ import {renderContent} from "/utilities/render/contentRenderUtilities.js";
 import {GetCommunitiesHandler} from "/handlers/GetCommunitiesHandler.js";
 import {TokenUtilities} from "/utilities/TokenUtilities.js";
 import {CommunityActionHandler} from "/handlers/CommunityActionHandler.js";
+import {router} from "/index.js";
 
 export class CommunitiesViewController {
     constructor() {
@@ -10,6 +11,9 @@ export class CommunitiesViewController {
     }
 
     async onLoad() {
+        if (!TokenUtilities.isAuthorized()) {
+            await router.navigate("/notAuthorized");
+        }
         await headerRenderer.renderHeader();
         await renderContent("/resources/templates/communities.html");
         const communities = await this.getCommunitiesHandler.handle();

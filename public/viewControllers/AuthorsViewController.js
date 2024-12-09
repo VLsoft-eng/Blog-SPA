@@ -1,5 +1,7 @@
 import {renderContent} from "/utilities/render/contentRenderUtilities.js";
 import {GetAuthorsHandler} from "/handlers/GetAuthorsHandler.js";
+import {router} from "/index.js";
+import {TokenUtilities} from "/utilities/TokenUtilities.js";
 
 export class AuthorsViewController {
     constructor() {
@@ -7,6 +9,9 @@ export class AuthorsViewController {
     }
 
     async handle() {
+        if (!TokenUtilities.isAuthorized()) {
+            await router.navigate("/notAuthorized");
+        }
         await headerRenderer.renderHeader();
         await renderContent("/resources/templates/authors.html");
         const authors = await this.getAuthorsHandler.handle();

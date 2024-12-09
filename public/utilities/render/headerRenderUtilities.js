@@ -30,7 +30,7 @@ export class HeaderRenderer {
             ],
         ]);
 
-        this.unauthorizeNavigateElemenets = ["main-nav-link", "authors-nav-link", "groups-nav-link"];
+        this.unauthorizeNavigateElemenets = ["main-nav-link"];
     }
 
     async fetchTemplate(url) {
