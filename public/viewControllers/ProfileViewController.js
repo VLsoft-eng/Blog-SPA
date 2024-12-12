@@ -25,7 +25,9 @@ export class ProfileViewController {
             const value = input.value.replace(/\D/g, "");
             input.value = this.updateProfileHandler.formatPhone(value);
         });
-        updateProfileForm.addEventListener("submit", (e) => {this.updateProfileHandler.handle(e);});
+        updateProfileForm.addEventListener("submit", (e) => {
+            this.updateProfileHandler.handle(e);
+        });
     }
 
 }
