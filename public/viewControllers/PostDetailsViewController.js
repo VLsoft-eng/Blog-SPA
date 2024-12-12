@@ -241,6 +241,7 @@ export class PostDetailsViewController {
 
             if (comment.modifiedDate) {
                 commentEditedLabelElement.classList.remove('d-none');
+                commentEditedLabelElement.title = comment.modifiedDate;
             }
 
             commentElement.classList.remove('d-none')
